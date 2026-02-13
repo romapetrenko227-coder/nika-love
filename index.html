@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ника 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8, #ffeaf4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    animation: fadeInBody 2s ease;
+}
+
+@keyframes fadeInBody {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.start-screen {
+    text-align: center;
+    transition: opacity 1.5s ease;
+}
+
+.start-screen.fade-out {
+    opacity: 0;
+}
+
+.start-btn {
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 30px;
+    background: #ff4d88;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    transform: scale(1.1);
+}
+
+#wishText {
+    display: none;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ff3385;
+    animation: fadeIn 2s ease forwards;
+    transition: opacity 1.5s ease;
+}
+
+.card {
+    display: none;
+    background: rgba(255,255,255,0.9);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(255,105,180,0.25);
+    max-width: 450px;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 2s ease forwards;
+}
+
+h1 {
+    font-size: 32px;
+    color: #ff4d88;
+    text-shadow: 0 0 10px rgba(255,105,180,0.6);
+}
+
+.love-photo {
+    width: 240px;
+    border-radius: 25px;
+    margin: 20px 0;
+    transition: 0.4s ease;
+    box-shadow: 0 15px 35px rgba(255,105,180,0.35);
+}
+
+.love-photo:hover {
+    transform: scale(1.07);
+}
+
+p {
+    color: #555;
+    font-size: 17px;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.yes {
+    background: #ff4d88;
+    color: white;
+}
+
+.no {
+    background: #ccc;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+#finalText {
+    display: none;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ff3385;
+    animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(15px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 18px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="start-screen" id="startScreen">
+    <button class="start-btn" onclick="showWish()">Нажми на меня 💌</button>
+    <div id="wishText">
+        С Днём святого Валентина ✨💖
+    </div>
+</div>
+
+<div class="card" id="mainCard">
+    <h1>Ника 💖</h1>
+
+    <img src="love.jpg" alt="Мы вместе" class="love-photo">
+
+    <p>Ты — самое нежное, что есть в моей жизни?✨</p>
+
+    <div>
+        <button class="yes" onclick="sayYes()">Да 💕</button>
+        <button class="no" onmouseover="moveButton(this)">Нет 🙈</button>
+    </div>
+
+    <div id="finalText">
+        Я знал, что ты согласишься 😌  
+        Ты — моё счастье, мой покой и моя любовь.  
+        Я очень тебя люблю 💖
+    </div>
+</div>
+
+<script>
+function showWish() {
+    const wish = document.getElementById("wishText");
+    wish.style.display = "block";
+
+    setTimeout(() => {
+        // Начинаем плавное исчезновение
+        const startScreen = document.getElementById("startScreen");
+        startScreen.classList.add("fade-out");
+
+        setTimeout(() => {
+            // Скрываем экран и показываем карточку
+            startScreen.style.display = "none";
+            document.getElementById("mainCard").style.display = "block";
+        }, 1500); // Время совпадает с transition
+    }, 3000); // Показываем пожелание 3 секунды
+}
+
+function moveButton(button) {
+    button.style.position = "absolute";
+    button.style.top = Math.random() * 80 + "%";
+    button.style.left = Math.random() * 80 + "%";
+}
+
+function sayYes() {
+    document.getElementById("finalText").style.display = "block";
+    startHearts();
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+
+function startHearts() {
+    setInterval(createHeart, 300);
+}
+</script>
+
+</body>
+</html>
